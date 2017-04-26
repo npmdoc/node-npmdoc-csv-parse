@@ -1,6 +1,6 @@
 # npmdoc-csv-parse
 
-#### api documentation for  [csv-parse (v1.2.0)](http://csv.adaltas.com/parse/)  [![npm package](https://img.shields.io/npm/v/npmdoc-csv-parse.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-csv-parse) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-csv-parse.svg)](https://travis-ci.org/npmdoc/node-npmdoc-csv-parse)
+#### basic api documentation for  [csv-parse (v1.2.0)](http://csv.adaltas.com/parse/)  [![npm package](https://img.shields.io/npm/v/npmdoc-csv-parse.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-csv-parse) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-csv-parse.svg)](https://travis-ci.org/npmdoc/node-npmdoc-csv-parse)
 
 #### CSV parsing implementing the Node.js `stream.Transform` API
 
@@ -127,7 +127,8 @@
         "pretest": "coffee -b -o lib src",
         "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script/register --reporter dot"
     },
-    "version": "1.2.0"
+    "version": "1.2.0",
+    "bin": {}
 }
 ```
 
