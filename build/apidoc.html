@@ -607,7 +607,23 @@ parser.push = function(record) {
     return this.push(row);
   }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  try {
+    this.__write(this._.decoder.end(), true);
+    if (this._.quoting) {
+      this.emit(&#x27;error&#x27;, new Error(&#x22;Quoted field not terminated at line &#x22; + (this.lines + 1)));
+      return;
+    }
+    if (this._.line.length &#x3e; 0) {
+      this.<span class="apidocCodeKeywordSpan">__push</span>(this._.line);
+    }
+    return callback();
+  } catch (error) {
+    err = error;
+    return this.emit(&#x27;error&#x27;, err);
+  }
+};
+...</pre></li>
     </ul>
 
 
@@ -731,19 +747,19 @@ l - i &#x3c;= this.options.escape.length &#x26;&#x26; this.options.escape.substr
       }
     } ...</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  parser.push = function(record) {
-    if (options.objname) {
-      return records[record[0]] = record[1];
-    } else {
-      return records.push(record);
-    }
-  };
-  parser.<span class="apidocCodeKeywordSpan">__write</span>(data, false);
-  if (data instanceof Buffer) {
-    parser.__write(data.end(), true);
+
+Parser.prototype._transform = function(chunk, encoding, callback) {
+  var err, error;
+  if (chunk instanceof Buffer) {
+    chunk = this._.decoder.write(chunk);
   }
-  parser._flush((function() {}));
-  return records;
+  try {
+    this.<span class="apidocCodeKeywordSpan">__write</span>(chunk, false);
+    return callback();
+  } catch (error) {
+    err = error;
+    return this.emit(&#x27;error&#x27;, err);
+  }
 };
 ...</pre></li>
     </ul>
